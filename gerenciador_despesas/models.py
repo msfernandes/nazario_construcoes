@@ -27,7 +27,7 @@ class Obra(models.Model):
     )
 
     endereco_obra = models.CharField(
-        max_length=75,
+        max_length=255,
         verbose_name="Endereço"
     )
 
@@ -48,7 +48,7 @@ class Boleto(models.Model):
     vencimento = models.DateField()
 
     cod_barras = models.CharField(
-        max_length=150,
+        max_length=170,
         verbose_name="Código de Barras")
 
     pago = models.BooleanField()
@@ -76,7 +76,7 @@ class Despesa(models.Model):
         max_length=7,
         choices=TIPOS_DESPESA,
         verbose_name="Tipo")
-    obra = models.ForeignKey('Obra')
+    obra = models.ForeignKey('Obra', blank=True, null=True)
     categoria = models.ForeignKey('outros.Categoria')
     fornecedor = models.ForeignKey('gerenciador_contatos.Fornecedor')
     etapa = models.ForeignKey('outros.Etapa')

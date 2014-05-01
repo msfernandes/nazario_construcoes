@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'nazario_construcoes.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nazario_construcoes',
+        'NAME': 'nazario_construcoes2',
         'USER': 'root',
-        'PASSWORD': 'root'
+        'PASSWORD': 'nazario4270'
     }
 }
 

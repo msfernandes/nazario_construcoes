@@ -1,6 +1,6 @@
 INSERT INTO `outros_mes` (id, descricao) VALUES (01,'Janeiro');
 INSERT INTO `outros_mes` (id, descricao) VALUES (02,'Fevereiro');
-INSERT INTO `outros_mes` (id, descricao) VALUES (03,'Março');
+INSERT INTO `outros_mes` (id, descricao) VALUES (03,'Marco');
 INSERT INTO `outros_mes` (id, descricao) VALUES (04,'Abril');
 INSERT INTO `outros_mes` (id, descricao) VALUES (05,'Maio');
 INSERT INTO `outros_mes` (id, descricao) VALUES (06,'Junho');
