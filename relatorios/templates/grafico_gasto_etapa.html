@@ -1,0 +1,43 @@
+
+<script type="text/javascript">
+    $(function () {
+        
+        // Build the chart
+        $('#boletos_etapa').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: true
+            },
+            title: {
+                text: 'Gastos por Etapa'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>R$ {point.y:.2f}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.point.percentage.toFixed(1) + '%' ;
+                        }
+                    },
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Porcentagem',
+                data: [
+                {% for etapa in total_etapa %}
+                    ['{{etapa.descricao}}', {{etapa.valor}}],
+                {% endfor %}
+                ]
+            }]
+        });
+    });
+</script>

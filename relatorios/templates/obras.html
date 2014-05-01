@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Obras | Nazário Construções
+{% endblock title %}
+
+{% block graph_scripts %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    {% include 'grafico_gasto_categoria.html' %}
+    {% include 'grafico_gasto_etapa.html' %}
+{% endblock graph_scripts %}
+
+{% block content %}
+    <div class="row">
+        <p><h1>Nazário Construções.<small>Obra: {{obra}}</small></h1></p>
+        <hr>
+    </div>
+
+    <div class="row">
+        <dl class="tabs" data-tab>
+            <dd class="active"><a href="#tab-detalhado">Relatório Detalhado</a></dd>
+            <dd><a href="#tab-categoria">Relatório Por Categoria</a></dd>
+            <dd><a href="#tab-etapa">Relatorio Por Etapa</a></dd>
+        </dl>
+    <hr>
+    </div>
+
+    <div class="row">
+        <div class="tabs-content">
+            <div class="content active" id="tab-detalhado">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width=150>Vencimento</th>
+                            <th width=150>Valor</th>
+                            <th width=400>Código de Barras</th>
+                            <th width=50>Pago</th>
+                            <th width=200>Conta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for boleto in boletos %}
+                            <tr>
+                                <td>{{boleto.vencimento}}</td>
+                                <td>R$ {{boleto.valor}}</td>
+                                <td>{{boleto.cod_barras}}</td>
+                                {% if boleto.pago == True %}
+                                    <td><i class="fi-check"></i></td>
+                                    <td>{{boleto.conta.banco}}<br>
+                                        {{boleto.conta.titular}}<br>
+                                        Agência: {{boleto.conta.agencia}}<br>
+                                        Conta: {{boleto.conta.conta}}</td>
+                                {% else %}
+                                    <td><i class="fi-x"></i></td>
+                                    <td>---</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content" id="tab-categoria" align="center">
+                <div id="boletos_categoria" class="row"></div><br>
+            </div>
+
+            <div class="content" id="tab-etapa" align="center">
+                <div id="boletos_etapa" class="row"></div><br>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block footer_scripts %}
+    {% load staticfiles %}
+    <script src="{% static "foundation/js/foundation/foundation.tab.js" %}"></script>
+{% endblock footer_scripts %}

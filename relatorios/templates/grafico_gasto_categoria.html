@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    $(function () {
+    
+        // Radialize the colors
+        Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+            return {
+                radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, color],
+                    [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                ]
+            };
+        });
+        
+        // Build the chart
+        $('#boletos_categoria').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: true
+            },
+            title: {
+                text: 'Gastos por Categoria'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>R$ {point.y:.2f}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.point.percentage.toFixed(1) + '%' ;
+                        }
+                    },
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Porcentagem',
+                data: [
+                {% for categoria in total_categoria %}
+                    ['{{categoria.descricao}}', {{categoria.valor}}],
+                {% endfor %}
+                ]
+            }]
+        });
+    });
+</script>

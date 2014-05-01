@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contatos | Nazário Construções
+{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <p><h1>Nazário Construções.<small>Contatos</small></h1></p>
+        <hr>
+    </div>
+
+    <div class="row">
+        <dl class="tabs" data-tab>
+            <dd class="active"><a href="#tab-clientes">Clientes</a></dd>
+            <dd><a href="#tab-fornecedores">Fornecedores</a></dd>
+            <dd><a href="#tab-contas">Contas</a></dd>
+        </dl>
+    <hr>
+    </div>
+
+    <div class="row">
+        <div class="tabs-content">
+            <div class="content active" id="tab-clientes">
+                <div class="row">
+                    {% for cliente in lista_clientes %}
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <h4><b>{{cliente.cliente.nome}}.</b>
+                                <small><a href="mailto:{{cliente.cliente.email}}">{{cliente.cliente.email}}</a></small></h4>
+                                <p>{{cliente.cliente.endereco}}</p><hr>
+                                <p><h5><b>Telefones</b></h5></p>
+                                <p>
+                                    {% for telefone in cliente.telefones %}
+                                    <b>{{telefone.tag}}:</b>  {{telefone.telefone}}<br>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            <div class="large-6 columns">
+                                {% for obra in cliente.obras %}
+                                <ul class="pricing-table">
+                                    <li class="title">{{obra.endereco_obra}}</li>
+                                    
+                                    {% if obra.valor_contrato != None %}
+                                    <li class="price">R$ {{obra.valor_contrato}}</li>
+                                    {% else %}
+                                    <li class="price">---</li>
+                                    <li class="description">Valor de contrato ainda não foi definido.</li>
+                                    {% endif %}
+                                    
+                                    {% if obra.data_inicio != None %}
+                                    <li class="bullet-item">Inicio: {{obra.data_inicio}}</li>
+                                    {% else %}
+                                    <li class="bullet-item">Data de início ainda não definida.</li>
+                                    {% endif %}
+
+                                    {% if obra.data_fim != None %}
+                                    <li class="bullet-item">Final: {{obra.data_fim}}</li>
+                                    {% else %}
+                                    <li class="bullet-item">Data final ainda não foi definida.</li>
+                                    {% endif %}
+                                </ul>
+                                {% endfor %}
+                            </div>
+                            <hr>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="content" id="tab-fornecedores">
+                <div class="row">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th width="300">Nome</th>
+                                <th width="300">Email</th>
+                                <th width="200">Telefone</th>
+                                <th width="200">Tipo de Telefone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for dado in lista_fornecedores %}
+                            <tr>
+                                <td>{{dado.fornecedor.nome}}</td>
+                                <td>{{dado.fornecedor.email}}</td>
+                                <td>{{dado.telefone}}</td>
+                                <td>{{dado.tag}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="content" id="tab-contas" align="center">
+                <div class="row">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th width="150">Banco</th>
+                                <th width="300">Titular</th>
+                                <th width="200">Agência</th>
+                                <th width="200">Conta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for conta in lista_contas %}
+                            <tr>
+                                <td>{{conta.banco}}</td>
+                                <td>{{conta.titular}}</td>
+                                <td>{{conta.agencia}}</td>
+                                <td>{{conta.conta}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block footer_scripts %}
+    {% load staticfiles %}
+    <script src="{% static "foundation/js/foundation/foundation.tab.js" %}"></script>
+{% endblock footer_scripts %}

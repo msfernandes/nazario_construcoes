@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="no-js">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title%}Nazário Construções{% endblock title%}</title>
+
+    {% block css %}
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static "foundation/css/foundation.css" %}" />
+        <link rel="stylesheet" href="{% static "foundation/icons/foundation-icons.css" %}" />
+    {% endblock css %}
+    
+    
+    
+    {% block header_scripts %}
+    {% endblock header_scripts %}
+</head>
+
+<body>
+    <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+            <li class="name">
+                <h1><a href="/relatorios/">Nazário Construções</a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon">
+                <a href="#">Menu</a>
+            </li>
+        </ul>
+    </nav>
+
+    {% block content %}
+        {% csrf_token %}
+    {% endblock content %}
+
+    {% block modal %}
+    {% endblock modal %}
+
+    {% block graph_scripts %}
+    {% endblock graph_scripts %}
+
+    {% load staticfiles %}
+    <script src="{% static "foundation/js/vendor/modernizr.js" %}"></script>    
+    <script src="{% static "foundation/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "foundation/js/foundation/foundation.js" %}"></script>
+    <script src="{% static "js/highcharts/highcharts.js" %}"></script>
+    <script src="{% static "js/highcharts/modules/exporting.js" %}"></script>
+    
+    {% block footer_scripts %}
+    {% endblock footer_scripts %}
+
+    <script>
+      $(document).foundation();
+    </script>
+</body>

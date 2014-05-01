@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Relatórios | Nazário Construções
+{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <p><h1>Nazário Construções</h1></p>
+        <hr>
+        <p><h3>Relatórios</h3></p>
+    </div>
+
+    <div class="row">
+        <div class="large-6 columns">
+            <a class="button large expand" href="contatos">Contatos</a>
+        </div>
+
+        <div class="large-6 columns">
+            <button class="large expand" data-reveal-id="selecionar_obra">Obras</button>
+        </div>
+    </div>
+    
+    <!--
+    <div class="row">
+        <div class="large-6 columns">
+            <a class="button large expand" href="resumo">Resumo de Obra</a>
+        </div>
+
+        <div class="large-6 columns">
+            <button class="large expand">Despesas</button>
+        </div>
+    </div>
+    -->
+{% endblock content %}
+
+{% block modal %}
+    <div id="selecionar_obra" class="reveal-modal small" data-reveal>
+        <p><h3>Selecione a Obra...</h3></p>
+        <form action="obras/" method="post">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="large-12 columns">
+                    <select name="obra">
+                        {% for obra in lista_obras %}
+                        <option value="{{obra.id}}">{{obra}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="large-8 columns">
+                    <select name="mes">
+                        {% for mes in meses %}
+                        <option value="{{mes.id}}">{{mes.descricao}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="large-4 columns">
+                    <input type="number" name="ano" placeholder="Ano" required pattern=[0-9]{4}>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="large-4 columns">
+                    <p></p>
+                </div>
+                <div class="large-4 columns">
+                    <button class="postfix">Filtrar</button>
+                </div>
+                <div class="large-4 columns">
+                    <p></p>
+                </div>
+            </div>
+            
+        </form>
+        
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+{% endblock modal %}
+
+{% block footer_scripts %}
+    {% load staticfiles %}
+    
+    <script src="{% static "foundation/js/foundation/foundation.reveal.js" %}"></script>
+    
+{% endblock footer_scripts %}
