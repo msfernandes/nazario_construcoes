@@ -42,7 +42,7 @@ admin.site.register(Despesa, DespesaAdmin)
 
 
 class BoletoAdmin(admin.ModelAdmin):
-    list_display = ('despesa', 'vencimento', 'valor',
+    list_display = ('despesa', 'get_fornecedor', 'vencimento', 'valor',
                     'cod_barras', 'pago', 'conta')
 
     list_filter = ['pago', 'vencimento']
