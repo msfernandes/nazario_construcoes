@@ -55,7 +55,7 @@ class Boleto(models.Model):
 
     conta = models.ForeignKey('gerenciador_contatos.Conta',
                               blank=True, null=True)
-    observacoes = models.TextField()
+    observacoes = models.TextField(blank=True, null=True)
 
     def get_fornecedor(self):
         return self.despesa.fornecedor.nome
