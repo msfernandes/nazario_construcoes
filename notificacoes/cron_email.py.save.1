@@ -64,12 +64,9 @@ class EnviarEmail(CronJobBase):
         for boleto in boletos:
             info_boleto = """<b>Despesa:</b> %s<br>
             <b>Valor:</b> %.2f<br>
-            <b>Fornecedor:</b> %s<br>
             <b>Cod. de Barras:</b> %s<br>
             <a href="http://177.153.6.164/admin/gerenciador_despesas/boleto/%s">
-            Marcar como Pago</a><br><hr/> """ % (
-                boleto.despesa, boleto.valor, boleto.despesa.fornecedor.nome,
-                str(boleto.cod_barras), boleto.id)
+            Marcar como Pago</a><br><hr/> """ % (boleto.despesa, boleto.valor, str(boleto.cod_barras), boleto.id)
 
             mensagem = mensagem + info_boleto
 
@@ -82,5 +79,5 @@ class EnviarEmail(CronJobBase):
         # Envia o email.
         print 'Enviando email...'
         gm.sendmail("rodolfotio@gmail.com",
-                    "rodolfotio@gmail.com", mail.as_string())
+                    "rodolfo@gmail.com", mail.as_string())
         gm.close()
