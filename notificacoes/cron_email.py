@@ -14,7 +14,7 @@ from datetime import date
 
 
 class EnviarEmail(CronJobBase):
-    RUN_AT_TIMES = ['12:00']
+    RUN_AT_TIMES = ['13:00', '19:00']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
 
@@ -62,7 +62,7 @@ class EnviarEmail(CronJobBase):
         mensagem = header + introducao
 
         for boleto in boletos:
-            info_boleto = """<b>Despesa:</b> %s<br>
+            info_boleto = u"""<b>Despesa:</b> %s<br>
             <b>Valor:</b> %.2f<br>
             <b>Fornecedor:</b> %s<br>
             <b>Cod. de Barras:</b> %s<br>
@@ -71,7 +71,7 @@ class EnviarEmail(CronJobBase):
                 boleto.despesa, boleto.valor, boleto.despesa.fornecedor.nome,
                 str(boleto.cod_barras), boleto.id)
 
-            mensagem = mensagem + info_boleto
+            mensagem = mensagem + info_boleto.encode('utf-8')
 
         return mensagem
 
